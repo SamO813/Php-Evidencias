@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Facturas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-yellow-200">
+
+    <!-- Menú Superior -->
+    <nav class="bg-yellow-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white font-bold text-2xl">IPS Vacunate SAS</a>
+            <div class="space-x-4">
+                <a href="Cliente_CRUD.html" class="text-white hover:text-gray-300">Clientes</a>
+                <a href="Productos_CRUD.html" class="text-white hover:text-gray-300">Productos</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6">Gestión de Facturas</h1>
+
+    <!-- Botón para Crear Facturas -->
+    <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onclick="document.getElementById('crearFacturaModal').classList.remove('hidden');">Crear Factura</button>
+
+    <!-- Modal para Crear Facturas -->
+    <div id="crearFacturaModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-yellow-200 p-6 rounded-lg shadow-md w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-4">Crear Factura</h2>
+            <form action="gestion_facturas.php" method="post" class="space-y-4">
+                <input type="hidden" name="accion" value="create">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre de la Factura</label>
+                    <input type="text" name="nombreFactura" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Código del Cliente</label>
+                    <input type="number" name="cliCodigo" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Código del Producto</label>
+                    <input type="number" name="proCodigo" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Cantidad</label>
+                    <input type="number" name="cantidad" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2" onclick="document.getElementById('crearFacturaModal').classList.add('hidden');">Cancelar</button>
+                    <input type="submit" value="Crear" class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+                </div>
+            </form>
+        </div>
+    </div>
+
+        <!-- Botón Mostrar Facturas -->
+        <button onclick="location.href='gestion_facturas.php?accion=read'" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 mt-4">Mostrar Facturas</button>
+
+        <!-- Botón Actualizar Factura -->
+        <button onclick="toggleModal('modalActualizarFactura')" class="bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700 mt-4">Actualizar Factura</button>
+
+        <!-- Modal Actualizar Factura -->
+        <div id="modalActualizarFactura" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+            <div class="bg-yellow-200 p-8 rounded-lg shadow-lg max-w-md w-full">
+                <h2 class="text-2xl font-bold mb-4">Actualizar Factura</h2>
+                <form action="gestion_facturas.php" method="post" class="space-y-4">
+                    <input type="hidden" name="accion" value="update">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Código de la Factura</label>
+                        <input type="number" name="facCodigo" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nombre de la Factura</label>
+                        <input type="text" name="nombreFactura" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Código del Cliente</label>
+                        <input type="number" name="cliCodigo" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Código del Producto</label>
+                        <input type="number" name="proCodigo" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Cantidad</label>
+                        <input type="number" name="cantidad" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" onclick="toggleModal('modalActualizarFactura')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                        <input type="submit" value="Actualizar" class="bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Botón Eliminar Factura -->
+        <button onclick="toggleModal('modalEliminarFactura')" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 mt-4">Eliminar Factura</button>
+
+        <!-- Modal Eliminar Factura -->
+        <div id="modalEliminarFactura" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+            <div class="bg-yellow-200 p-8 rounded-lg shadow-lg max-w-md w-full">
+                <h2 class="text-2xl font-bold mb-4">Eliminar Factura</h2>
+                <form action="gestion_facturas.php" method="post" class="space-y-4">
+                    <input type="hidden" name="accion" value="delete">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Código de la Factura</label>
+                        <input type="number" name="facCodigo" required class="mt-1 block w-full border border-yellow-300 p-2 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" onclick="toggleModal('modalEliminarFactura')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                        <input type="submit" value="Eliminar" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts para manejar modales -->
+    <script>
+        function toggleModal(modalID) {
+            document.getElementById(modalID).classList.toggle('hidden');
+        }
+    </script>
+
+</body>
+</html>

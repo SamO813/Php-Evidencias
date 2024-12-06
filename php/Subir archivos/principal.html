@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Lista para subir archivos</h1>
+
+<form action="subir.php" method="post" enctype="multipart/form-data">
+  <ul>
+    <li>
+      <label for="fileToUpload">Selecciona una imagen:</label>
+      <input type="file" name="fileToUpload[]" id="fileToUpload" accept="image/*" multiple>
+    </li>
+    <li>
+      <label for="fileToUploadDos">Selecciona un archivo de Word:</label>
+      <input type="file" name="fileToUploadDos" id="fileToUploadDos" accept=".doc,.docx">
+    </li>
+    <li>
+      <input type="submit" value="Subir archivos" name="submit">
+    </li>
+  </ul>
+</form>
+
+</body>
+</html>

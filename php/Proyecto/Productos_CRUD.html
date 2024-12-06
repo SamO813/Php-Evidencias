@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-200">
+
+    <!-- Menú Superior -->
+    <nav class="bg-green-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white font-bold text-2xl">IPS Vacunate SAS</a>
+            <div class="space-x-4">
+                <a href="Cliente_CRUD.html" class="text-white hover:text-gray-300">Clientes</a>
+                <a href="Facturas_CRUD.html" class="text-white hover:text-gray-300">Facturas</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Gestión de Productos</h1>
+
+    <!-- Contenedor de Botones -->
+    <div class="space-y-4">
+        <!-- Botón Crear Producto -->
+        <button onclick="toggleModal('modalCrearProducto')" class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Crear Producto</button>
+
+        <!-- Botón Mostrar Productos -->
+        <button onclick="location.href='gestion_productos.php?accion=read'" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Mostrar Productos</button>
+
+        <!-- Botón Actualizar Producto -->
+        <button onclick="toggleModal('modalActualizarProducto')" class="bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700">Actualizar Producto</button>
+
+        <!-- Botón Eliminar Producto -->
+        <button onclick="toggleModal('modalEliminarProducto')" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">Eliminar Producto</button>
+    </div>
+
+    <!-- Modal Crear Producto -->
+    <div id="modalCrearProducto" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Crear Producto</h2>
+            <form action="gestion_productos.php" method="post" class="space-y-4">
+                <input type="hidden" name="accion" value="create">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" name="nombre" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Lote</label>
+                    <input type="text" name="lote" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Valor</label>
+                    <input type="number" name="valor" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="toggleModal('modalCrearProducto')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                    <input type="submit" value="Crear" class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Actualizar Producto -->
+    <div id="modalActualizarProducto" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Actualizar Producto</h2>
+            <form action="gestion_productos.php" method="post" class="space-y-4">
+                <input type="hidden" name="accion" value="update">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Código Producto</label>
+                    <input type="number" name="codigo" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" name="nombre" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Lote</label>
+                    <input type="text" name="lote" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Valor</label>
+                    <input type="number" name="valor" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="toggleModal('modalActualizarProducto')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                    <input type="submit" value="Actualizar" class="bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Producto -->
+<div id="modalEliminarProducto" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-4">Eliminar Producto</h2>
+        <form action="gestion_productos.php" method="post" class="space-y-4">
+            <input type="hidden" name="accion" value="delete">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Código Producto</label>
+                <input type="number" name="codigo" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+            </div>
+            <div class="flex justify-end">
+                <button type="button" onclick="toggleModal('modalEliminarProducto')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                <input type="submit" value="Eliminar" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts para manejar modales -->
+<script>
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle('hidden');
+    }
+</script>
+
+</body>
+</html>

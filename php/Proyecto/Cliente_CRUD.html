@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-blue-200">
+
+    <!-- Menú Superior -->
+    <nav class="bg-indigo-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white font-bold text-2xl">IPS Vacunate SAS</a>
+            <div class="space-x-4">
+                <a href="Productos_CRUD.html" class="text-white hover:text-gray-300">Productos</a>
+                <a href="Facturas_CRUD.html" class="text-white hover:text-gray-300">Facturas</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Gestión de Clientes</h1>
+
+    <!-- Contenedor de Botones -->
+    <div class="space-y-4">
+        <!-- Botón Crear Cliente -->
+        <button onclick="toggleModal('modalCrearCliente')" class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Crear Cliente</button>
+
+        <!-- Botón Mostrar Clientes -->
+        <button onclick="location.href='gestion_clientes.php?accion=read'" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Mostrar Clientes</button>
+
+        <!-- Botón Actualizar Cliente -->
+        <button onclick="toggleModal('modalActualizarCliente')" class="bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700">Actualizar Cliente</button>
+
+        <!-- Botón Eliminar Cliente -->
+        <button onclick="toggleModal('modalEliminarCliente')" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">Eliminar Cliente</button>
+    </div>
+
+    <!-- Modal Crear Cliente -->
+    <div id="modalCrearCliente" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-blue-200 p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Crear Cliente</h2>
+            <form action="gestion_clientes.php" method="post" class="space-y-4">
+                <input type="hidden" name="accion" value="create">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" name="nombre" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Apellidos</label>
+                    <input type="text" name="apellido" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tipo de Documento</label>
+                    <select name="tipoDocumento" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="Cedula de ciudadania">Cédula de ciudadanía</option>
+                        <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+                        <option value="Registro civil">Registro civil</option>
+                        <option value="PPT">PPT</option>
+                        <option value="Cedula de extranjeria">Cédula de extranjería</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Número de Documento</label>
+                    <input type="text" name="numeroDocumento" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+                    <input type="text" name="telefono" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                    <input type="date" name="fechaNacimiento" required class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="toggleModal('modalCrearCliente')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                    <input type="submit" value="Crear" class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Actualizar Cliente -->
+    <div id="modalActualizarCliente" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-blue-200 p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Actualizar Cliente</h2>
+            <form action="gestion_clientes.php" method="post" class="space-y-4">
+                <input type="hidden" name="accion" value="update">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Código Cliente</label>
+                    <input type="number" name="codigo" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" name="nombre" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Apellidos</label>
+                    <input type="text" name="apellido" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tipo de Documento</label>
+                    <select name="tipoDocumento" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                        <option value="Cedula de ciudadania">Cédula de ciudadanía</option>
+                        <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+                        <option value="Registro civil">Registro civil</option>
+                        <option value="PPT">PPT</option>
+                        <option value="Cedula de extranjeria">Cédula de extranjería</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Número de Documento</label>
+                    <input type="text" name="numeroDocumento" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+                    <input type="text" name="telefono" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                    <input type="date" name="fechaNacimiento" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="toggleModal('modalActualizarCliente')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                    <input type="submit" value="Actualizar" class="bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Cliente -->
+<div id="modalEliminarCliente" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+    <div class="bg-blue-200 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-4">Eliminar Cliente</h2>
+        <form action="gestion_clientes.php" method="post" class="space-y-4">
+            <input type="hidden" name="accion" value="delete">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Código Cliente</label>
+                <input type="number" name="codigo" required class="mt-1 block w-full border border-blue-300 p-2 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+            </div>
+            <div class="flex justify-end">
+                <button type="button" onclick="toggleModal('modalEliminarCliente')" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2">Cancelar</button>
+                <input type="submit" value="Eliminar" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts para manejar modales -->
+<script>
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle('hidden');
+    }
+</script>
+
+</body>
+</html>
